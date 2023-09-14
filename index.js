@@ -1,5 +1,17 @@
 const rl = require('readline-sync')
 
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('mock.db');
+
+db.serialize(() => {
+  db.run("CREATE TABLE IF NOT EXISTS alunos (matricula INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, cpf TEXT, numTelefone TEXT, plano TEXT, endereco TEXT)");
+  db.run("CREATE TABLE IF NOT EXISTS professores (nome TEXT, cpf TEXT, salario REAL, turno TEXT, numTelefone TEXT, endereco TEXT)");
+});
+
+db.close((err) => {
+    if (err) return console.log(err.message);
+});
+
 let flag = true
 let listaAlunos = []
 let listaProfessores = []
@@ -73,6 +85,14 @@ function cadastrarAluno() {
     
     listaAlunos.push(novoAluno)    
    
+    const sql = 'INSERT INTO alunos (nome, cpf, numTelefoneAluno, plano, endereco) VALUES (?, ?, ?, ?, ?)'; //numTelefoneAluno?
+    db.run(sql, [novoAluno.nomeAluno, novoAluno.cpfAluno, novoAluno.numTelefoneAluno, novoAluno.planoAcademia, novoAluno.enderecoAluno], (err) => {
+      if (err) {
+        console.error('Erro ao cadastrar aluno:', err.message);
+        return;
+      }
+      console.log(`Aluno ${novoAluno.nomeAluno} cadastrado com sucesso!`);
+    });
 
 }
 
@@ -87,6 +107,14 @@ function cadastrarProfessor() {
     
     listaProfessores.push(professores)
     
+    const sql = 'INSERT INTO professores (nome, cpf, salario, turno, numTelefone, endereco) VALUES (?, ?, ?, ?, ?, ?)';
+    db.run(sql, [novoProfessor.nomeProfessor, novoProfessor.cpfProfessor, novoProfessor.salario, novoProfessor.turno, novoProfessor.numTelefoneProfessor, novoProfessor.enderecoProfessor], (err) => {
+      if (err) {
+        console.error('Erro ao cadastrar professor:', err.message);
+        return;
+      }
+      console.log(`Professor ${novoProfessor.nomeProfessor} cadastrado com sucesso!`);
+    });
 
 }
 
