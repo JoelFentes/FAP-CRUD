@@ -1,14 +1,12 @@
 const rl = require('readline-sync')
 
-const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("mock.db");
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('mock.db');
 
 db.serialize(() => {
   db.run("CREATE TABLE IF NOT EXISTS alunos (matricula INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, cpf TEXT, numTelefone TEXT, plano TEXT, endereco TEXT)");
-//   db.run("CREATE TABLE IF NOT EXISTS professores (nome TEXT, cpf TEXT, salario REAL, turno TEXT, numTelefone TEXT, endereco TEXT)");
+  db.run("CREATE TABLE IF NOT EXISTS professores (nome TEXT, cpf TEXT, salario REAL, turno TEXT, numTelefone TEXT, endereco TEXT)");
 });
-
-db.run("CREATE TABLE IF NOT EXISTS alunos (matricula INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, cpf TEXT, numTelefone TEXT, plano TEXT, endereco TEXT)");
 
 db.close((err) => {
     if (err) return console.log(err.message);
@@ -16,7 +14,7 @@ db.close((err) => {
 
 let flag = true
 let listaAlunos = []
-let listaProfessores = []
+//let listaProfessores = []
 let matricula = 0
 
 
@@ -86,78 +84,67 @@ function cadastrarAluno() {
     const novoAluno = new CadastroAluno(matricula, nomeAluno, cpfAluno, numTelefoneAluno, planoAcademia, enderecoAluno);
     
     listaAlunos.push(novoAluno)    
-
-    db.run(`
-    INSERT INTO alunos (nome, cpf, numTelefoneAluno, plano, endereco) 
-    VALUES ('Waldeck', '5555555555', '989989889', 'zozlandia 123')`);
    
-    // const sql = 'INSERT INTO alunos (nome, cpf, numTelefoneAluno, plano, endereco) VALUES (?, ?, ?, ?, ?)'; //numTelefoneAluno?
-    // db.run(sql, [nomeAluno, cpfAluno, numTelefoneAluno, planoAcademia, enderecoAluno], (err) => {
-    //   if (err) {
-    //     console.error('Erro ao cadastrar aluno:', err.message);
-    //     return;
-    //   }
-    //   console.log(`Aluno ${nomeAluno} cadastrado com sucesso!`);
-    // });
-
-}
-
-function cadastrarProfessor() {  
-    let nomeProfessor = rl.question("Digite o nome do Professor: ")
-    let cpfProfessor = rl.question("Digite o CPF do Professor: ")
-    let numTelefoneProfessor = rl.question("Digite o número de Telefone do Professor: ")
-    let salario = rl.question("Digite o Salário: ")
-    let turno = rl.question("Digite o Turno do Professor: ")
-    let enderecoProfessor = rl.question("Digite o Endereço do Professor: ")
-    const novoProfessor = new CadastroProfessor(nomeProfessor, cpfProfessor, salario, turno, numTelefoneProfessor, enderecoProfessor)
-    
-    listaProfessores.push(professores)
-    
-    const sql = 'INSERT INTO professores (nome, cpf, salario, turno, numTelefone, endereco) VALUES (?, ?, ?, ?, ?, ?)';
-    db.run(sql, [novoProfessor.nomeProfessor, novoProfessor.cpfProfessor, novoProfessor.salario, novoProfessor.turno, novoProfessor.numTelefoneProfessor, novoProfessor.enderecoProfessor], (err) => {
+    const sql = 'INSERT INTO alunos (nome, cpf, numTelefoneAluno, plano, endereco) VALUES (?, ?, ?, ?, ?)'; //numTelefoneAluno?
+    db.run(sql, [listaAlunos.nomeAluno, listaAlunos.cpfAluno, listaAlunos.numTelefoneAluno, listaAlunos.planoAcademia, listaAlunos.enderecoAluno], (err) => {
       if (err) {
-        console.error('Erro ao cadastrar professor:', err.message);
+        console.error('Erro ao cadastrar aluno:', err.message);
         return;
       }
-      console.log(`Professor ${novoProfessor.nomeProfessor} cadastrado com sucesso!`);
+      console.log(`Aluno cadastrado com sucesso!`);
     });
+    db.execute;
 
 }
 
 function listarAlunos() {
-    if (!listaAlunos.length) {
-        console.log("Não Existe Alunos");
-    }
-    else {
-        for (const alunos of listaAlunos) {
-            console.log(`Matrícula: ${alunos.matricula}\nNome: ${alunos.nomeAluno}\nPlano: ${alunos.planoAcademia}`);
+    const sql = 'SELECT * FROM alunos';
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Erro ao listar alunos:', err.message);
+            return;
         }
-    }
-}
+        if (rows.length === 0) {
+            console.log('Não existem alunos cadastrados.');
+        } else {
+            console.log('Lista de Alunos:');
+            rows.forEach((row) => {
+                console.log(`Matrícula: ${row.matricula}, Nome: ${row.nome}, Plano: ${row.plano}`);
+            });
+        }
+    });
+};
 
 function buscarAlunos() {
-    if (!listaAlunos.length) {
+    if (rows.length === 0) {
         console.log(`Não Existem Alunos, por favor, Cadastre um.`);
         }
         else {
             let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado? 1 - Sim, 2 - Não ")
             switch (options) {
                 case 1:          
+                    //continuar
                     searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
                     const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
                     console.log(`Informações do Aluno: ${search.nomeAluno}\nMatrícula: ${search.matricula}\nCPF: ${search.cpfAluno}\nPlano: ${search.planoAcademia}\nNúmero Telefone: ${search.numTelefoneAluno}\nEndereço: ${search.enderecoAluno}`);
     
                     break;
                 case 2:
-                    console.log("Aqui Estão Todos os Alunos Cadastrados:");
-                    listarAlunos()
-                    searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
-                    if (!listaAlunos.length) {
-                        console.log(`Não Existem Alunos, por favor, Cadastre um.`);
-                    }   else {
-                        const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
-                        console.log(`Informações do Aluno: ${search.nomeAluno}\nMatrícula: ${search.matricula}\nCPF: ${search.cpfAluno}\nPlano: ${search.planoAcademia}\nNúmero Telefone: ${search.numTelefoneAluno}\nEndereço: ${search.enderecoAluno}`);
-                    }
+                    const sql = 'SELECT * FROM alunos';
+                    db.all(sql, [], (err, rows) => {
+                        if (err) {
+                            console.error('Erro ao listar alunos:', err.message);
+                            return;
+                        }
+                        if (rows.length === 0) {
+                            console.log('Não existem alunos cadastrados.');
+                        } else {
+                            console.log('Lista de Alunos:');
+                            rows.forEach((row) => {
+                                console.log(`Matrícula: ${row.matricula}, Nome: ${row.nome}, Plano: ${row.plano}`);
+                            });
+                        }
+                    });
                     break; 
                     }
         }  

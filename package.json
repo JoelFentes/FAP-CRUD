@@ -1,5 +1,5 @@
 {
-  "name": "crud-fap",
+  "name": "fap-teste-(3)",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
     "readline-sync": "^1.4.10",
     "sqlite3": "^5.1.6"
   }
