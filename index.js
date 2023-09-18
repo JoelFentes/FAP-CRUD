@@ -68,6 +68,7 @@ switch (setor) {
                 break;
         
             default:
+                flag = false
                 break;
         }
     }
