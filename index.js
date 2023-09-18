@@ -7,7 +7,6 @@ let matricula = 0
 let professorID = 0
 
 
-
 class CadastroAluno {
     constructor(matricula, nomeAluno, cpfAluno, numTelefoneAluno, planoAcademia, enderecoAluno){
         this.matricula = matricula
