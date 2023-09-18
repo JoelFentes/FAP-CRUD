@@ -41,8 +41,7 @@ function menuAluno() {
     console.log("2 - Cadastrar um Novo Aluno");
     console.log("3 - Buscar um Aluno");
     console.log("4 - Alterar Cadastro Aluno");
-    console.log("5 - Renovar Plano Aluno");
-    console.log("6 - Remover um Aluno");
+    console.log("5 - Remover um Aluno");
     console.log("===================");
     
 }
@@ -55,19 +54,18 @@ function menuProfessor() {
     console.log("2 - Cadastrar um Novo Professor");
     console.log("3 - Buscar um Professor");
     console.log("4 - Alterar Cadastro Professor");
-    console.log("5 - Dar um Aumento ao Professor");
-    console.log("6 - Remover um Professor");
+    console.log("5 - Remover um Professor");
     console.log("===================");
     
    
 }
 
 function cadastrarAluno() {
-    let nomeAluno = rl.question("Digite o nome do Aluno: ")
-    let cpfAluno = rl.question("Digite o CPF do Aluno: ")
-    let numTelefoneAluno = rl.question("Digite o número de Telefone do Aluno: ")
-    let planoAcademia = rl.question("Digite o Plano do Aluno: Mensal, Trimensal, Semestral, Anual ")
-    let enderecoAluno = rl.question("Digite o Endereço do Aluno: ")
+    let nomeAluno = rl.question("Digite o nome do Aluno: \n")
+    let cpfAluno = rl.question("Digite o CPF do Aluno: \n")
+    let numTelefoneAluno = rl.question("Digite o número de Telefone do Aluno: \n")
+    let planoAcademia = rl.question("Digite o Plano do Aluno: Mensal, Trimensal, Semestral, Anual \n")
+    let enderecoAluno = rl.question("Digite o Endereço do Aluno: \n")
     matricula++
     const novoAluno = new CadastroAluno(matricula, nomeAluno, cpfAluno, numTelefoneAluno, planoAcademia, enderecoAluno);
     
@@ -77,15 +75,15 @@ function cadastrarAluno() {
 }
 
 function cadastrarProfessor() {  
-    let nomeProfessor = rl.question("Digite o nome do Professor: ")
-    let cpfProfessor = rl.question("Digite o CPF do Professor: ")
-    let numTelefoneProfessor = rl.question("Digite o número de Telefone do Professor: ")
-    let salario = rl.question("Digite o Salário: ")
-    let turno = rl.question("Digite o Turno do Professor: ")
-    let enderecoProfessor = rl.question("Digite o Endereço do Professor: ")
+    let nomeProfessor = rl.question("Digite o nome do Professor: \n")
+    let cpfProfessor = rl.question("Digite o CPF do Professor: \n")
+    let numTelefoneProfessor = rl.question("Digite o número de Telefone do Professor: \n")
+    let salario = rl.question("Digite o Salário: \n")
+    let turno = rl.question("Digite o Turno do Professor: \n")
+    let enderecoProfessor = rl.question("Digite o Endereço do Professor: \n")
     const novoProfessor = new CadastroProfessor(nomeProfessor, cpfProfessor, salario, turno, numTelefoneProfessor, enderecoProfessor)
     
-    listaProfessores.push(professores)
+    listaProfessores.push(novoProfessor)
     
 
 }
@@ -106,18 +104,18 @@ function buscarAlunos() {
         console.log(`Não Existem Alunos, por favor, Cadastre um.`);
         }
         else {
-            let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado? 1 - Sim, 2 - Não ")
+            let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado?\n 1 - Sim\n 2 - Não \n")
             switch (options) {
                 case 1:          
-                    searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
+                    searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: \n")
                     const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
                     console.log(`Informações do Aluno: ${search.nomeAluno}\nMatrícula: ${search.matricula}\nCPF: ${search.cpfAluno}\nPlano: ${search.planoAcademia}\nNúmero Telefone: ${search.numTelefoneAluno}\nEndereço: ${search.enderecoAluno}`);
     
                     break;
                 case 2:
-                    console.log("Aqui Estão Todos os Alunos Cadastrados:");
+                    console.log("Aqui Estão Todos os Alunos Cadastrados: \n");
                     listarAlunos()
-                    searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
+                    searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: \n")
                     if (!listaAlunos.length) {
                         console.log(`Não Existem Alunos, por favor, Cadastre um.`);
                     }   else {
@@ -137,34 +135,34 @@ function alterarAluno() {
     console.log(`Não Existem Alunos, por favor, Cadastre um.`);
     }
     else {
-        let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado? 1 - Sim, 2 - Não ")
+        let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado?\n 1 - Sim\n 2 - Não \n")
         switch (options) {
             case 1:          
-                searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
+                searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: \n")
                 const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);              
                 while (flagAlterar == true) {
-                    let alterar = rl.questionInt("O Que Você Deseja Alterar - 0 - Cancelar 1 - Nome, 2 - CPF, 3 - NumTelefone, 4 - Endereço")
+                    let alterar = rl.questionInt("O Que Você Deseja Alterar?\n 0 - Cancelar\n 1 - Nome\n 2 - CPF\n 3 - NumTelefone\n 4 - Endereço\n")
                     switch (alterar) {
                     case 0: 
                         flagAlterar = false
                         break;
                     case 1:
-                        valorAlterado = rl.question("Digite o Novo nome: ")
+                        valorAlterado = rl.question("Digite o Novo nome: \n")
                         search.nomeAluno = valorAlterado
                         break;
                 
                     case 2:
-                        valorAlterado = rl.question("Digite o Novo CPF: ")
+                        valorAlterado = rl.question("Digite o Novo CPF: \n")
                         search.cpfAluno = valorAlterado
                         break;
                 
                     case 3:
-                        valorAlterado = rl.question("Digite o Novo Número de Telefone: ")
+                        valorAlterado = rl.question("Digite o Novo Número de Telefone: \n")
                         search.numTelefoneAluno = valorAlterado
                         break;
                 
                     case 4:
-                        valorAlterado = rl.question("Digite o Novo Endereço: ")
+                        valorAlterado = rl.question("Digite o Novo Endereço: \n")
                         search.enderecoAluno = valorAlterado
                         break;
                 
@@ -177,12 +175,12 @@ function alterarAluno() {
             case 2:
                 console.log("Aqui Estão Todos os Alunos Cadastrados:");
                 listarAlunos()
-                searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
+                searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: \n")
                 if (!listaAlunos.length) {
                     console.log(`Não Existem Alunos, por favor, Cadastre um.`);
                 }   else {
                     const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
-                    let nomeAlteradoValue = rl.question("Digite o novo nome: ")
+                    let nomeAlteradoValue = rl.question("Digite o novo nome: \n")
                     search.nomeAluno = nomeAlteradoValue
     
                 }
@@ -193,16 +191,124 @@ function alterarAluno() {
 }
 
 
+////////////
 
 
-let setor = rl.questionInt("Escolha o setor que você deseja navegar: 1- Aluno ou 2- Professor? ")
+function listarProfessores() {
+    if (!listaProfessores.length) {
+        console.log("Não Existe Professores");
+    }
+    else {
+        for (const professor of listaProfessores) {
+            console.log(`Turno: ${professor.turno}\n Nome: ${professor.nomeProfessor}}`);
+        }
+    }
+}
+
+function buscarProfessores() {
+    if (!listaProfessores.length) {
+        console.log(`Não Existem Professores, por favor, Cadastre um.`);
+        }
+        else {
+            let options = rl.questionInt("Você Sabe o nome do professor desejado?\n 1 - Sim\n  2 - Não ")
+            switch (options) {
+                case 1:          
+                    searchQuestion = rl.questionInt("Digite o nome do professor que você deseja encontrar: ")
+                    const search = listaProfessores.find((listaProfessores) => listaProfessores.nomeProfessor === searchQuestion);
+                    console.log(`Informações do professor: ${search.nomeProfessor}\nTurno: ${search.turno}\nCPF: ${search.cpfProfessor}\nSalário: ${search.salario}\nNúmero Telefone: ${search.numTelefoneProfessor}\nEndereço: ${search.enderecoProfessor}`);
+    
+                    break;
+                case 2:
+                    console.log("Aqui Estão Todos os Professores Cadastrados:");
+                    listaProfessores()
+                    searchQuestion = rl.questionInt("Digite o nome do professor que você deseja encontrar: ")
+                    if (!listaProfessores.length) {
+                        console.log(`Não Existem Professores, por favor, Cadastre um.`);
+                    }   else {
+                        const search = listaProfessores.find((listaProfessores) => listaProfessores.nomeProfessor === searchQuestion);
+                        console.log(`Informações do professor: ${search.nomeProfessor}\nTurno: ${search.turno}\nCPF: ${search.cpfProfessor}\nSalário: ${search.salario}\nNúmero Telefone: ${search.numTelefoneProfessor}\nEndereço: ${search.enderecoProfessor}`);
+                    }
+                    break; 
+                    }
+        }  
+
+}
+
+
+function alterarProfessor() {
+    let flagAlterar = true
+    let valorAlterado
+    if (!listaProfessores.length) {
+    console.log(`Não Existem Professores, por favor, Cadastre um.`);
+    }
+    else {
+        let options = rl.questionInt("Você Sabe o nome do professor Desejado?\n 1 - Sim\n 2 - Não ")
+        switch (options) {
+            case 1:          
+                searchQuestion = rl.questionInt("Digite o nome do professor que você deseja encontrar: \n")
+                const search = listaProfessores.find((listaProfessores) => listaProfessores.nomeProfessor === searchQuestion);              
+                while (flagAlterar == true) {
+                    let alterar = rl.questionInt("O Que Você Deseja Alterar\n 0 - Cancelar\n 1 - Nome\n 2 - CPF\n 3 - NumTelefone\n 4 - Endereço\n")
+                    switch (alterar) {
+                    case 0: 
+                        flagAlterar = false
+                        break;
+                    case 1:
+                        valorAlterado = rl.question("Digite o Novo nome: \n")
+                        search.nomeProfessor = valorAlterado
+                        break;
+                
+                    case 2:
+                        valorAlterado = rl.question("Digite o Novo CPF: \n")
+                        search.cpfProfessor = valorAlterado
+                        break;
+                
+                    case 3:
+                        valorAlterado = rl.question("Digite o Novo Número de Telefone: \n")
+                        search.numTelefoneProfessor = valorAlterado
+                        break;
+                
+                    case 4:
+                        valorAlterado = rl.question("Digite o Novo Endereço: \n")
+                        search.enderecoProfessor = valorAlterado
+                        break;
+                
+                    default:
+                        console.log("seboso");
+                        break;
+                }
+            }
+                break;
+            case 2:
+                console.log("Aqui Estão Todos os Professores Cadastrados:");
+                listaProfessores()
+                searchQuestion = rl.questionInt("Digite o nome do professor que você deseja encontrar: \n")
+                if (!listaProfessores.length) {
+                    console.log(`Não Existem Professores, por favor, Cadastre um.`);
+                }   else {
+                    const search = listaProfessores.find((listaProfessores) => listaProfessores.nomeProfessor === searchQuestion);
+                    let nomeAlteradoValue = rl.question("Digite o novo nome: \n")
+                    search.nomeProfessor = nomeAlteradoValue
+    
+                }
+                break; 
+        }
+    }  
+        
+}
+
+
+////////////
+
+
+let setor = rl.questionInt("Escolha o setor que você deseja navegar:\n 1- Aluno\n 2- Professor \n")
 
 
 switch (setor) {
     case 1:
         while (flag == true) {
             menuAluno()          
-            let options = rl.questionInt("Escolha uma opção: ")
+            let options = rl.questionInt("Escolha uma opção: \n")
             switch (options) {
                 case 0:
                     flag = false
@@ -220,7 +326,7 @@ switch (setor) {
                     alterarAluno()
                     break;
                 case 5:
-                    
+                    apagarAluno()
                     break;
                 case 6:
                     
@@ -245,16 +351,16 @@ switch (setor) {
                 cadastrarProfessor()
                 break;
             case 3:
-                
+                listarProfessores()
                 break;
             case 4:
-                
+                buscarProfessores()
                 break;
             case 5:
-                
+                alterarProfessor()
                 break;
             case 6:
-                
+                apagarProfessor()
                 break;
         
             default:
