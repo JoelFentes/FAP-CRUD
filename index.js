@@ -1,5 +1,6 @@
 import {menuAluno, menuProfessor, cadastrarAluno, listarAlunos, buscarAlunos, alterarAluno, renovarPlano, removerAluno, listarProfessores, cadastrarProfessor, buscarProfessor, alterarProfessor, aumentarSalario, removerProfessor} from "./funcoes.js";
 import rl from 'readline-sync';
+import clear from "clear";
 
 let flag = true
 
@@ -10,25 +11,29 @@ let setor = rl.questionInt("Escolha o setor que você deseja navegar: 1- Aluno o
 switch (setor) {
     case 1:
         while (flag == true) {
-            menuAluno()          
+            menuAluno()       
             let op = rl.questionInt("Escolha uma opção: ")
             switch (op) {
                 case 0:
                     flag = false
                     break;
                 case 1:
+                    clear()
                     listarAlunos()
                     break;
                 case 2:
+                    clear()
                     cadastrarAluno()
                     break;
                 case 3:
+                    clear()
                     buscarAlunos()
                     break;
                 case 4:
                     alterarAluno()
                     break;
                 case 5:
+                    clear()
                     renovarPlano()
                     break;
                 case 6:

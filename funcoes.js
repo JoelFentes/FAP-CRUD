@@ -1,4 +1,5 @@
 
+import clear from 'clear';
 import rl from 'readline-sync';
 
 
@@ -15,10 +16,7 @@ class CadastroAluno {
         this.numTelefoneAluno = numTelefoneAluno
         this.planoAcademia = planoAcademia
         this.enderecoAluno = enderecoAluno
-        this.tempoFidelidade = planoAcademia
     }
-
-
 }
 
 class CadastroProfessor {
@@ -64,7 +62,6 @@ export function menuProfessor() {
     console.log("5 - Dar um Aumento ao Professor");
     console.log("6 - Remover um Professor");
     console.log("===================");
-    
    
 }
 
@@ -77,9 +74,8 @@ export function cadastrarAluno() {
     matricula++
     const novoAluno = new CadastroAluno(matricula, nomeAluno, cpfAluno, numTelefoneAluno, planoAcademia, enderecoAluno);
     
-    listaAlunos.push(novoAluno)    
-   
-
+    listaAlunos.push(novoAluno)   
+    clear()
 }
 
 export function listarAlunos() {
@@ -89,8 +85,13 @@ export function listarAlunos() {
     else {
         for (const alunos of listaAlunos) {
             console.log(`Matrícula: ${alunos.matricula}\nNome: ${alunos.nomeAluno}\nPlano: ${alunos.planoAcademia}`);
+           
         }
+        let nada = rl.question("Aperte ENTER para sair")
+        clear()
     }
+
+
 }
 
 export function buscarAlunos() {
@@ -98,24 +99,28 @@ export function buscarAlunos() {
         console.log(`Não Existem Alunos, por favor, Cadastre um.`);
         }
         else {
+            clear()
             let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado? 1 - Sim, 2 - Não ")
             switch (options) {
                 case 1:          
                     let searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
                     const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
                     console.log(`Informações do Aluno: ${search.nomeAluno}\nMatrícula: ${search.matricula}\nCPF: ${search.cpfAluno}\nPlano: ${search.planoAcademia}\nNúmero Telefone: ${search.numTelefoneAluno}\nEndereço: ${search.enderecoAluno}`);
-    
+                    let nada = rl.question("Aperte ENTER para sair")
+                    clear()
                     break;
                 case 2:
                     console.log("Aqui Estão Todos os Alunos Cadastrados:");
                     listarAlunos()
-                    searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
+                    let searchQuestion2 = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
                     if (!listaAlunos.length) {
                         console.log(`Não Existem Alunos, por favor, Cadastre um.`);
                     }   else {
-                        const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
+                        const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion2);
                         console.log(`Informações do Aluno: ${search.nomeAluno}\nMatrícula: ${search.matricula}\nCPF: ${search.cpfAluno}\nPlano: ${search.planoAcademia}\nNúmero Telefone: ${search.numTelefoneAluno}\nEndereço: ${search.enderecoAluno}`);
                     }
+                    let nada2 = rl.question("Aperte ENTER para sair")
+                    clear()
                     break; 
                     }
         }  
@@ -129,39 +134,48 @@ export function alterarAluno() {
     console.log(`Não Existem Alunos, por favor, Cadastre um.`);
     }
     else {
+        clear()
         let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado? 1 - Sim, 2 - Não ")
         switch (options) {
             case 1:          
-                searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
+                let searchQuestion = rl.questionInt("Digite a matrícula do Aluno que você deseja encontrar: ")
                 const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);              
                 while (flagAlterar == true) {
+                    clear()
                     let alterar = rl.questionInt("O Que Você Deseja Alterar - 0 - Cancelar [1] - Nome [2] - CPF [3] - NumTelefone [4] - Endereço")
                     switch (alterar) {
                     case 0: 
                         flagAlterar = false
+                        clear()
+
                         break;
                     case 1:
                         valorAlterado = rl.question("Digite o Novo nome: ")
                         search.nomeAluno = valorAlterado
+                        clear()
                         break;
                 
                     case 2:
                         valorAlterado = rl.question("Digite o Novo CPF: ")
                         search.cpfAluno = valorAlterado
+                        clear()
                         break;
                 
                     case 3:
                         valorAlterado = rl.question("Digite o Novo Número de Telefone: ")
                         search.numTelefoneAluno = valorAlterado
+                        clear()
                         break;
                 
                     case 4:
                         valorAlterado = rl.question("Digite o Novo Endereço: ")
                         search.enderecoAluno = valorAlterado
+                        clear()
                         break;
                 
                     default:
-                        console.log("seboso");
+                        console.log("Digite uma opção válida por favor");
+                        clear()
                         break;
                 }
             }
@@ -169,33 +183,38 @@ export function alterarAluno() {
             case 2:
                 console.log("Aqui Estão Todos os Alunos Cadastrados:");
                 listarAlunos()
-                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
-                const searchP = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
+                let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
+                const searchP = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion2);
                 while (flagAlterar == true) {
                     let alterar = rl.questionInt("Digite O Que Você Deseja Alterar:\n[0] - Cancelar\n [1] - Nome\n [2] - CPF\n [3] - Número de Telefone\n [4] - Endereço ")
                     switch (alterar) {
                         case 0:
                             flagAlterar = false
+                            clear()
                             break;
                     
                         case 1:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.nomeAluno = valorAlterado
+                            clear()
                             break;
                     
                         case 2:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.cpfAluno = valorAlterado
+                            clear()
                             break;
                     
                         case 3:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.numTelefoneAluno =  valorAlterado
+                            clear()
                             break;
                     
                         case 4:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.enderecoAluno = valorAlterado
+                            clear()
                             break;
 
                         default:
@@ -215,23 +234,28 @@ export function alterarAluno() {
 export function renovarPlano() {
     if (!listaAlunos.length) {
         console.log(`Não Existem Alunos, por favor, Cadastre um.`);
+        clear()
         }
         else {
             let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado:\n [1] - Sim\n [2] - Não ")
+            clear()
         switch (options) {
             case 1:
                 let searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                clear()
                 const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
                 let novaMatricula = rl.question("Digite a nova modalidade de matricula: ")
-                search.matricula = novaMatricula
+                search.planoAcademia = novaMatricula
             break;
             case 2:
                 console.log("Aqui estão todos os Alunos");
                 listarAlunos()
-                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
-                const search2 = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
-                novaMatricula = rl.question("Digite a nova modalidade de matricula: ")
-                search2.matricula = novaMatricula
+                clear()
+                let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
+                clear()
+                const search2 = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion2);
+                let novaMatricula2 = rl.question("Digite a nova modalidade de matricula: ")
+                search2.planoAcademia = novaMatricula2
             break;
         }
     }
@@ -240,24 +264,29 @@ export function renovarPlano() {
 export function removerAluno() {
     if (!listaAlunos.length) {
         console.log(`Não Há Alunos Registrados`);
+        clear()
     }
     else {
         let options = rl.questionInt("Você Sabe a Matrícula do Aluno Desejado:\n [1] - Sim\n [2] - Não ")
+        clear()
         switch (options) {
             case 1:
                 let searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                clear()
                 const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
                 listaAlunos.splice(search)
             break;
             case 2:
                 console.log("Aqui estão todos os Alunos");
                 listarAlunos()
-                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
-                const search2 = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
+                clear()
+                let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
+                const search2 = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion2);
                 listaAlunos.splice(search2)
             break;
             default:
             console.log("Digite uma opção válida");
+            clear()
             break;
         }
     }
@@ -266,9 +295,12 @@ export function removerAluno() {
 export function listarProfessores() {
     if (!listaProfessores.length) {
         console.log("Não Existem Professores registrados");
+        clear()
     } else {
         for (let professores of listaProfessores) {
             console.log(`ID: ${professores.professorID}\nNome: ${professores.nomeProfessor}\nTurno: ${professores.turno}`)
+            let nada = rl.question("Aperte ENTER para sair")
+            clear()
         }
     }
 }
@@ -289,24 +321,32 @@ export function cadastrarProfessor() {
 export function buscarProfessor() {
     if (!listaProfessores.length) {
         console.log(`Não Existem Professores registrados`)
+        clear()
     } 
     else {
         let options = rl.questionInt("Você Sabe o ID do Professor Desejado? 1 - Sim, 2 - Não ")
+        clear()
         switch (options) {
             case 1:          
                 let searchQuestion = rl.questionInt("Digite o ID do Professor que você deseja encontrar: ")
+                clear()
                 const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
                 console.log(`Informações do professor ${search.nomeProfessor}\nID do professor: ${search.professorID}\nCpf: ${search.cpfProfessor}\nSalário: ${search.salario}\nTurno: ${search.turno}\nNúmero de telefone: ${search.numTelefoneProfessor}\nEndereço: ${search.enderecoProfessor}`);
+                clear()
                 break;
             case 2:
                 console.log("Aqui Estão Todos os Professores Cadastrados:");
                 listarProfessores()
-                searchQuestion = rl.questionInt("Digite o ID do Professor que você deseja encontrar: ")
+                clear()
+                let searchQuestion2 = rl.questionInt("Digite o ID do Professor que você deseja encontrar: ")
+                clear()
                 if (!listaProfessores.length) {
                     console.log(`Não Existem Alunos, por favor, Cadastre um.`);
+                    clear()
                 }   else {
-                    const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
+                    const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion2);
                     console.log(`Informações do professor ${search.nomeProfessor}\nID do professor: ${search.professorID}\nCpf: ${search.cpfProfessor}\nSalário: ${search.salario}\nTurno: ${search.turno}\nNúmero de telefone: ${search.numTelefoneProfessor}\nEndereço: ${search.enderecoProfessor}`);
+                    clear()
                 }
                 break;
             }
@@ -318,47 +358,58 @@ export function alterarProfessor() {
     let valorAlterado
     if (!listaProfessores.length) {
         console.log(`Não Há Professores Registrados`);
+        clear()
     }
     else {
         let options = rl.questionInt("Você Sabe o ID do Professor Desejado:\n [1] - Sim\n [2] - Não ")
+        clear()
         switch (options) {
             case 1:
                 let searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                clear()
                 const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
                 while (flagAlterar == true) {
+                    clear()
                     let alterar = rl.questionInt("Digite O Que Você Deseja Alterar:\n[0] - Cancelar\n [1] - Nome\n [2] - Salário\n [3] - Turno\n [4] - Número de Telefone\n [5] - Endereço ")
                     switch (alterar) {
                         case 0:
                             flagAlterar = false
+                            clear()
                             break;
                     
                         case 1:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             search.nomeProfessor = valorAlterado
+                            clear()
                             break;
                     
                         case 2:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             search.salario = valorAlterado
+                            clear()
                             break;
                     
                         case 3:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             search.turno =  valorAlterado
+                            clear()
                             break;
                     
                         case 4:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             search.numTelefoneProfessor = valorAlterado
+                            clear()
                             break;
                     
                         case 5:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             search.enderecoProfessor = valorAlterado
+                            clear()
                             break;
                     
                         default:
                             console.log("Digite um valor válido");
+                            clear()
                             break;
                     }
                 }
@@ -366,42 +417,52 @@ export function alterarProfessor() {
             case 2:
                 console.log("Aqui estão todos os professores cadastrados");
                 listarProfessores()
-                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
-                const searchP = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
+                clear()
+                let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
+                clear()
+                const searchP = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion2);
                 while (flagAlterar == true) {
+                    clear()
                     let alterar = rl.questionInt("Digite O Que Você Deseja Alterar:\n[0] - Cancelar\n [1] - Nome\n [2] - Salário\n [3] - Turno\n [4] - Número de Telefone\n [5] - Endereço ")
                     switch (alterar) {
                         case 0:
                             flagAlterar = false
+                            clear()
                             break;
                     
                         case 1:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.nomeProfessor = valorAlterado
+                            clear()
                             break;
                     
                         case 2:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.salario = valorAlterado
+                            clear()
                             break;
                     
                         case 3:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.turno =  valorAlterado
+                            clear()
                             break;
                     
                         case 4:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.numTelefoneProfessor = valorAlterado
+                            clear()
                             break;
                     
                         case 5:
                             valorAlterado = rl.question("Digite o Novo Valor: ")
                             searchP.enderecoProfessor = valorAlterado
+                            clear()
                             break;
                     
                         default:
                             console.log("Digite um valor válido");
+                            clear()
                             break;
                     }
                 }
@@ -409,6 +470,7 @@ export function alterarProfessor() {
         
             default:
                 console.log("Digite uma opção válida");
+                clear()
                 break;
         }
     }
@@ -417,24 +479,30 @@ export function alterarProfessor() {
 export function removerProfessor() {
     if (!listaProfessores.length) {
         console.log(`Não Há Professores Registrados`);
+        clear()
     }
     else {
         let options = rl.questionInt("Você Sabe o ID do Professor Desejado:\n [1] - Sim\n [2] - Não ")
+        clear()
         switch (options) {
             case 1:
                 let searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                clear()
                 const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
                 listaProfessores.splice(search)
             break;
             case 2:
                 console.log("Aqui estão todos os professores");
                 listarProfessores()
-                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
-                const search2 = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
+                clear()
+                let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
+                clear()
+                const search2 = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion2);
                 listaProfessores.splice(search2)
             break;
             default:
             console.log("Digite uma opção válida");
+            clear()
             break;
         }
     }
@@ -443,23 +511,31 @@ export function removerProfessor() {
 export function aumentarSalario(){
     if (!listaProfessores.length) {
         console.log(`Não Há Professores Registrados`);
+        clear()
     } else {
         let options = rl.questionInt("Você Sabe o ID do Professor Desejado:\n [1] - Sim\n [2] - Não ")
+        clear()
         switch (options) {
             case 1:
                 let searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                clear()
                 const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
                 search.aumento()
+                clear()
                 break;
             case 2:
                 console.log("Aqui estão todos os professores");
                 listarProfessores()
-                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
-                const search2 = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion)
+                clear()
+                let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
+                clear()
+                const search2 = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion2)
                 search2.aumento()
+                clear()
                 break;
             default:
                 console.log("Digite uma opção válida por favor!")
+                clear()
                 break;
         }
     }
