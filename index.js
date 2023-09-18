@@ -31,6 +31,11 @@ class CadastroProfessor {
         this.turno = turno
         this.numTelefoneProfessor = numTelefoneProfessor
         this.enderecoProfessor = enderecoProfessor
+
+    }
+    aumento() {
+        let valor = rl.questionInt("Digite a porcentagem de aumento que será dada ao professor")
+        this.salario = this.salario * (100 + valor) / 100
     }
 }
 
@@ -433,6 +438,32 @@ function removerProfessor() {
     }
 }
 
+function aumentarSalario(){
+    if (!listaProfessores.length) {
+        console.log(`Não Há Professores Registrados`);
+    } else {
+        let options = rl.questionInt("Você Sabe o ID do Professor Desejado:\n [1] - Sim\n [2] - Não ")
+        switch (options) {
+            case 1:
+                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
+                search.aumento()
+                break;
+            case 2:
+                console.log("Aqui estão todos os professores");
+                listarProfessores()
+                searchQuestion = rl.questionInt("Digite o ID Desejado: ")
+                const search2 = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion)
+                search2.aumento()
+                break;
+            default:
+                console.log("Digite uma opção válida por favor!")
+                break;
+        }
+    }
+
+}
+
 
 
 let setor = rl.questionInt("Escolha o setor que você deseja navegar: 1- Aluno ou 2- Professor? ")
@@ -492,13 +523,14 @@ switch (setor) {
                 alterarProfessor()
                 break;
             case 5:
-               
+                aumentarSalario()
                 break;
             case 6:
                 removerProfessor()
                 break;
         
             default:
+                flag = false
                 break;
         }
     }
