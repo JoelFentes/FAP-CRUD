@@ -5,7 +5,7 @@ import clear from "clear";
 let flag = true
 
 
-let setor = rl.questionInt("Escolha o setor que você deseja navegar: 1- Aluno ou 2- Professor? ")
+let setor = rl.questionInt("Escolha o setor que você deseja navegar:\n 1- Aluno\n 2- Professor ")
 
 
 switch (setor) {
