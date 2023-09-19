@@ -16,6 +16,8 @@ switch (setor) {
             switch (op) {
                 case 0:
                     flag = false
+                    clear()
+                    console.log("Obrigado por usar nosso aplicativo! Volte sempre");
                     break;
                 case 1:
                     clear()
@@ -41,7 +43,8 @@ switch (setor) {
                     break;
             
                 default:
-                    console.log("donzelo");
+                    flag = false
+                    console.log("Error");
                     break;
             }
         }
@@ -53,6 +56,11 @@ switch (setor) {
         menuProfessor()
         let opx = rl.questionInt("Escolha uma opção: ")
         switch (opx) {
+            case 0: 
+                flag = false
+                clear()
+                console.log("Obrigado por usar nosso aplicativo! Volte sempre");
+                break;
             case 1:
                 listarProfessores()
                 break;
@@ -74,6 +82,7 @@ switch (setor) {
         
             default:
                 flag = false
+                console.log("Error");
                 break;
         }
     }

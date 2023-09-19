@@ -31,10 +31,27 @@ class CadastroProfessor {
     }
 
     aumento() {
-        let valor = rl.questionInt("Digite a porcentagem de aumento que será dada ao professor")
+        let valor = rl.questionInt("Digite a Porcentagem de Aumento que será Dada ao Professor: ")
         this.salario = this.salario * (100 + valor) / 100
     }
 }
+
+export function validacaoResposta(pergunta) {
+    let resposta = '';
+  
+    while (resposta.trim() === '') {
+      resposta = rl.question(pergunta);
+  
+      if (resposta.trim() === '') {
+        clear()
+        console.log('Por favor, Preencha Este Campo, Valor Obrigatório. ');
+        
+      }
+    }
+  
+    return resposta;
+  }
+
 
 
 export function menuAluno() {
@@ -66,11 +83,11 @@ export function menuProfessor() {
 }
 
 export function cadastrarAluno() {
-    let nomeAluno = rl.question("Digite o nome do Aluno: ")
-    let cpfAluno = rl.question("Digite o CPF do Aluno: ")
-    let numTelefoneAluno = rl.question("Digite o número de Telefone do Aluno: ")
-    let planoAcademia = rl.question("Digite o Plano do Aluno: Mensal, Trimensal, Semestral, Anual ")
-    let enderecoAluno = rl.question("Digite o Endereço do Aluno: ")
+    let nomeAluno = validacaoResposta("Digite o nome do Aluno: ")
+    let cpfAluno = validacaoResposta("Digite o CPF do Aluno: ")
+    let numTelefoneAluno = validacaoResposta("Digite o número de Telefone do Aluno: ")
+    let planoAcademia = validacaoResposta("Digite o Plano do Aluno: Mensal, Trimensal, Semestral, Anual ")
+    let enderecoAluno = validacaoResposta("Digite o Endereço do Aluno: ")
     matricula++
     const novoAluno = new CadastroAluno(matricula, nomeAluno, cpfAluno, numTelefoneAluno, planoAcademia, enderecoAluno);
     
@@ -122,7 +139,12 @@ export function buscarAlunos() {
                     let nada2 = rl.question("Aperte ENTER para sair")
                     clear()
                     break; 
-                    }
+                    default:
+                    console.log("Digite uma opção válida");
+                    buscarAlunos
+                    break;
+                }
+
         }  
 
 }
@@ -142,7 +164,7 @@ export function alterarAluno() {
                 const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);              
                 while (flagAlterar == true) {
                     clear()
-                    let alterar = rl.questionInt("O Que Você Deseja Alterar - 0 - Cancelar [1] - Nome [2] - CPF [3] - NumTelefone [4] - Endereço")
+                    let alterar = rl.questionInt("O Que Você Deseja Alterar: 0 - Cancelar [1] - Nome [2] - CPF [3] - NumTelefone [4] - Endereço: ")
                     switch (alterar) {
                     case 0: 
                         flagAlterar = false
@@ -150,32 +172,32 @@ export function alterarAluno() {
 
                         break;
                     case 1:
-                        valorAlterado = rl.question("Digite o Novo nome: ")
+                        valorAlterado = validacaoResposta("Digite o Novo nome: ")
                         search.nomeAluno = valorAlterado
                         clear()
                         break;
                 
                     case 2:
-                        valorAlterado = rl.question("Digite o Novo CPF: ")
+                        valorAlterado = validacaoResposta("Digite o Novo CPF: ")
                         search.cpfAluno = valorAlterado
                         clear()
                         break;
                 
                     case 3:
-                        valorAlterado = rl.question("Digite o Novo Número de Telefone: ")
+                        valorAlterado = validacaoResposta("Digite o Novo Número de Telefone: ")
                         search.numTelefoneAluno = valorAlterado
                         clear()
                         break;
                 
                     case 4:
-                        valorAlterado = rl.question("Digite o Novo Endereço: ")
+                        valorAlterado = validacaoResposta("Digite o Novo Endereço: ")
                         search.enderecoAluno = valorAlterado
                         clear()
                         break;
                 
                     default:
                         console.log("Digite uma opção válida por favor");
-                        clear()
+                        alterarAluno()
                         break;
                 }
             }
@@ -186,7 +208,7 @@ export function alterarAluno() {
                 let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
                 const searchP = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion2);
                 while (flagAlterar == true) {
-                    let alterar = rl.questionInt("Digite O Que Você Deseja Alterar:\n[0] - Cancelar\n [1] - Nome\n [2] - CPF\n [3] - Número de Telefone\n [4] - Endereço ")
+                    let alterar = rl.questionInt("Digite O Que Você Deseja Alterar: [0] - Cancelar [1] - Nome [2] - CPF [3] - Número de Telefone\n [4] - Endereço: ")
                     switch (alterar) {
                         case 0:
                             flagAlterar = false
@@ -194,31 +216,32 @@ export function alterarAluno() {
                             break;
                     
                         case 1:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.nomeAluno = valorAlterado
                             clear()
                             break;
                     
                         case 2:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.cpfAluno = valorAlterado
                             clear()
                             break;
                     
                         case 3:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.numTelefoneAluno =  valorAlterado
                             clear()
                             break;
                     
                         case 4:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.enderecoAluno = valorAlterado
                             clear()
                             break;
 
                         default:
                             console.log("Digite um valor válido");
+                            alterarAluno()
                             break;
                     }
                 }
@@ -244,7 +267,7 @@ export function renovarPlano() {
                 let searchQuestion = rl.questionInt("Digite o ID Desejado: ")
                 clear()
                 const search = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion);
-                let novaMatricula = rl.question("Digite a nova modalidade de matricula: ")
+                let novaMatricula = validacaoResposta("Digite a nova modalidade de matricula: ")
                 search.planoAcademia = novaMatricula
             break;
             case 2:
@@ -254,9 +277,13 @@ export function renovarPlano() {
                 let searchQuestion2 = rl.questionInt("Digite o ID Desejado: ")
                 clear()
                 const search2 = listaAlunos.find((listaAlunos) => listaAlunos.matricula === searchQuestion2);
-                let novaMatricula2 = rl.question("Digite a nova modalidade de matricula: ")
+                let novaMatricula2 = validacaoResposta("Digite a nova modalidade de matricula: ")
                 search2.planoAcademia = novaMatricula2
             break;
+            default:
+                console.log("Digite uma opção válida");
+                renovarPlano()
+                break;
         }
     }
 }
@@ -286,7 +313,7 @@ export function removerAluno() {
             break;
             default:
             console.log("Digite uma opção válida");
-            clear()
+            removerAluno()
             break;
         }
     }
@@ -295,7 +322,6 @@ export function removerAluno() {
 export function listarProfessores() {
     if (!listaProfessores.length) {
         console.log("Não Existem Professores registrados");
-        clear()
     } else {
         for (let professores of listaProfessores) {
             console.log(`ID: ${professores.professorID}\nNome: ${professores.nomeProfessor}\nTurno: ${professores.turno}`)
@@ -306,22 +332,22 @@ export function listarProfessores() {
 }
 
 export function cadastrarProfessor() {  
-    let nomeProfessor = rl.question("Digite o nome do Professor: ")
-    let cpfProfessor = rl.question("Digite o CPF do Professor: ")
-    let numTelefoneProfessor = rl.question("Digite o número de Telefone do Professor: ")
-    let salario = rl.question("Digite o Salário: ")
-    let turno = rl.question("Digite o Turno do Professor: ")
-    let enderecoProfessor = rl.question("Digite o Endereço do Professor: ")
+    let nomeProfessor = validacaoResposta("Digite o nome do Professor: ")
+    let cpfProfessor = validacaoResposta("Digite o CPF do Professor: ")
+    let numTelefoneProfessor = validacaoResposta("Digite o número de Telefone do Professor: ")
+    let salario = validacaoResposta("Digite o Salário: ")
+    let turno = validacaoResposta("Digite o Turno do Professor: ")
+    let enderecoProfessor = validacaoResposta("Digite o Endereço do Professor: ")
     professorID++
     const novoProfessor = new CadastroProfessor(professorID, nomeProfessor, cpfProfessor, salario, turno, numTelefoneProfessor, enderecoProfessor)
     
     listaProfessores.push(novoProfessor)
+    clear()
 }
 
 export function buscarProfessor() {
     if (!listaProfessores.length) {
         console.log(`Não Existem Professores registrados`)
-        clear()
     } 
     else {
         let options = rl.questionInt("Você Sabe o ID do Professor Desejado? 1 - Sim, 2 - Não ")
@@ -332,11 +358,13 @@ export function buscarProfessor() {
                 clear()
                 const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion);
                 console.log(`Informações do professor ${search.nomeProfessor}\nID do professor: ${search.professorID}\nCpf: ${search.cpfProfessor}\nSalário: ${search.salario}\nTurno: ${search.turno}\nNúmero de telefone: ${search.numTelefoneProfessor}\nEndereço: ${search.enderecoProfessor}`);
+                let nada = rl.question("Aperte ENTER para sair")
                 clear()
                 break;
             case 2:
                 console.log("Aqui Estão Todos os Professores Cadastrados:");
                 listarProfessores()
+                let nada2 = rl.question("Aperte ENTER para sair")
                 clear()
                 let searchQuestion2 = rl.questionInt("Digite o ID do Professor que você deseja encontrar: ")
                 clear()
@@ -346,9 +374,14 @@ export function buscarProfessor() {
                 }   else {
                     const search = listaProfessores.find((listaProfessores) => listaProfessores.professorID === searchQuestion2);
                     console.log(`Informações do professor ${search.nomeProfessor}\nID do professor: ${search.professorID}\nCpf: ${search.cpfProfessor}\nSalário: ${search.salario}\nTurno: ${search.turno}\nNúmero de telefone: ${search.numTelefoneProfessor}\nEndereço: ${search.enderecoProfessor}`);
+                    let nada2 = rl.question("Aperte ENTER para sair")
                     clear()
                 }
                 break;
+            default:
+                console.log("Digite uma opção válida.");
+                buscarProfessor()
+                break
             }
         }
 }
@@ -378,38 +411,38 @@ export function alterarProfessor() {
                             break;
                     
                         case 1:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             search.nomeProfessor = valorAlterado
                             clear()
                             break;
                     
                         case 2:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             search.salario = valorAlterado
                             clear()
                             break;
                     
                         case 3:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             search.turno =  valorAlterado
                             clear()
                             break;
                     
                         case 4:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             search.numTelefoneProfessor = valorAlterado
                             clear()
                             break;
                     
                         case 5:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             search.enderecoProfessor = valorAlterado
                             clear()
                             break;
                     
                         default:
                             console.log("Digite um valor válido");
-                            clear()
+                            alterarProfessor()
                             break;
                     }
                 }
@@ -431,38 +464,38 @@ export function alterarProfessor() {
                             break;
                     
                         case 1:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.nomeProfessor = valorAlterado
                             clear()
                             break;
                     
                         case 2:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.salario = valorAlterado
                             clear()
                             break;
                     
                         case 3:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.turno =  valorAlterado
                             clear()
                             break;
                     
                         case 4:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.numTelefoneProfessor = valorAlterado
                             clear()
                             break;
                     
                         case 5:
-                            valorAlterado = rl.question("Digite o Novo Valor: ")
+                            valorAlterado = validacaoResposta("Digite o Novo Valor: ")
                             searchP.enderecoProfessor = valorAlterado
                             clear()
                             break;
                     
                         default:
                             console.log("Digite um valor válido");
-                            clear()
+                            alterarProfessor()
                             break;
                     }
                 }
@@ -470,7 +503,7 @@ export function alterarProfessor() {
         
             default:
                 console.log("Digite uma opção válida");
-                clear()
+                alterarProfessor()
                 break;
         }
     }
@@ -502,7 +535,7 @@ export function removerProfessor() {
             break;
             default:
             console.log("Digite uma opção válida");
-            clear()
+            removerProfessor()
             break;
         }
     }
@@ -535,7 +568,7 @@ export function aumentarSalario(){
                 break;
             default:
                 console.log("Digite uma opção válida por favor!")
-                clear()
+                aumentarSalario()
                 break;
         }
     }
