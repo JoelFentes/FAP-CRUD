@@ -4,8 +4,24 @@
 
 ### Model
 
+|Aluno |
+|---|
+| matricula: |
+| nomeAluno: |
+| cpfAluno: |
+| numTelefoneAluno: |
+| planoAcademia: |
+| enderecoAluno: |
 
-
+|Professor|
+|---|
+| professorID |
+| nomeProfessor |
+| cpfProfessor |
+| salario |
+| turno |
+| numTelefoneProfessor |
+| enderecoProfessor |
 
 ### Controller
 
@@ -15,7 +31,6 @@
 |+ menuAluno():|
 |+ menuProfessor():|
 |+ cadastrarAluno():|
-|+ listarAlunos():|
 |+ buscarAlunos():|
 |+ alterarAluno():|
 |+ renovarPlano():|
@@ -35,6 +50,8 @@
 |---|
 |- menuAluno(): |
 |- menuProfessor(): |
+|- listarAlunos(): |
+|- listarProfessores():|
 
 
 
