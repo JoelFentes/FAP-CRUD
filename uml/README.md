@@ -1,65 +1,46 @@
 # Remodelando o CRUD da Academia
-
+Baseado no código do CRUD realizado na última entrega, aqui está o diagrama de classes UML dentro do padrão MVC.
 ## Diagrama UML no MVC:
 
 ### Model
 
 |Aluno |
 |---|
-| matricula: |
-| nomeAluno: |
-| cpfAluno: |
-| numTelefoneAluno: |
-| planoAcademia: |
-| enderecoAluno: |
+| - matricula- INT|
+| - nomeAluno- STRING|
+| - cpfAluno- INT|
+| - numTelefoneAluno- INT|
+| - planoAcademia- STRING|
+| - enderecoAluno- STRING|
+
 
 |Professor|
 |---|
-| professorID |
-| nomeProfessor |
-| cpfProfessor |
-| salario |
-| turno |
-| numTelefoneProfessor |
-| enderecoProfessor |
+| - professorID- INT |
+| - nomeProfessor- STRING |
+| - cpfProfessor- INT |
+| - salario- INT |
+| - turno- STRING |
+| - numTelefoneProfessor- INT |
+| - enderecoProfessor- STRING |
 
 ### Controller
 
-|  |
-|---|
-|+ validacaoResposta(pergunta):|
-|+ menuAluno():|
-|+ menuProfessor():|
-|+ cadastrarAluno():|
-|+ buscarAlunos():|
-|+ alterarAluno():|
-|+ renovarPlano():|
-|+ removerAluno():|
-|+ listarProfessores():|
-|+ cadastrarProfessor():|
-|+ buscarProfessor():|
-|+ alterarProfessor():|
-|+ aumentarSalario():|
+| Professor | Aluno | |
+|---|---|---|
+| + aumentarSalario():    | + renovarPlano(): |+ validacaoResposta(pergunta): |
+| + cadastrarProfessor(): |+ cadastrarAluno():|
+| + buscarProfessor():    |+ buscarAlunos():  |
+| + alterarProfessor():   |+ alterarAluno():  |
+|                         |+ removerAluno()|  |
+
 
 
 
 
 ### View
 
-|  |
-|---|
-|- menuAluno(): |
-|- menuProfessor(): |
-|- listarAlunos(): |
-|- listarProfessores():|
-
-
-
-
-
-
-
-
-
-markdonw
-https://experienceleague.adobe.com/docs/contributor/contributor-guide/writing-essentials/markdown.html?lang=pt-BR
+| ALUNO | PROFESSOR |
+|---    |---|
+| + menuAluno():    | + menuProfessor(): |
+| + listarAlunos(): | + listarProfessores():|
