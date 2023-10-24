@@ -1,4 +1,6 @@
-import {menuAluno, menuProfessor, cadastrarAluno, listarAlunos, buscarAlunos, alterarAluno, renovarPlano, removerAluno, listarProfessores, cadastrarProfessor, buscarProfessor, alterarProfessor, aumentarSalario, removerProfessor} from "./funcoes.js";
+import * as AlunoController from '/workspaces/FAP-CRUD/controllers/AlunoController.js';
+import * as ProfessorController from '/workspaces/FAP-CRUD/controllers/ProfessorController.js';
+
 import rl from 'readline-sync';
 import clear from "clear";
 
