@@ -34,7 +34,6 @@ Baseado no código do CRUD realizado na última entrega, aqui está o diagrama d
 | + alterarProfessor():   |+ alterarAluno():  |
 |                         |+ removerAluno()|  |
 
-
 ### View
 
 | ALUNO | PROFESSOR |
